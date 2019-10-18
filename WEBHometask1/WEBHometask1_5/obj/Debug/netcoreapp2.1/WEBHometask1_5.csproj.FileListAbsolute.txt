@@ -1,0 +1,11 @@
+C:\Third semester 2019-2020 academic year\WEBHometasks\WEBHometask1\WEBHometask1_5\bin\Debug\netcoreapp2.1\WEBHometask1_5.deps.json
+C:\Third semester 2019-2020 academic year\WEBHometasks\WEBHometask1\WEBHometask1_5\bin\Debug\netcoreapp2.1\WEBHometask1_5.runtimeconfig.json
+C:\Third semester 2019-2020 academic year\WEBHometasks\WEBHometask1\WEBHometask1_5\bin\Debug\netcoreapp2.1\WEBHometask1_5.runtimeconfig.dev.json
+C:\Third semester 2019-2020 academic year\WEBHometasks\WEBHometask1\WEBHometask1_5\bin\Debug\netcoreapp2.1\WEBHometask1_5.dll
+C:\Third semester 2019-2020 academic year\WEBHometasks\WEBHometask1\WEBHometask1_5\bin\Debug\netcoreapp2.1\WEBHometask1_5.pdb
+C:\Third semester 2019-2020 academic year\WEBHometasks\WEBHometask1\WEBHometask1_5\obj\Debug\netcoreapp2.1\WEBHometask1_5.csprojAssemblyReference.cache
+C:\Third semester 2019-2020 academic year\WEBHometasks\WEBHometask1\WEBHometask1_5\obj\Debug\netcoreapp2.1\WEBHometask1_5.csproj.CoreCompileInputs.cache
+C:\Third semester 2019-2020 academic year\WEBHometasks\WEBHometask1\WEBHometask1_5\obj\Debug\netcoreapp2.1\WEBHometask1_5.AssemblyInfoInputs.cache
+C:\Third semester 2019-2020 academic year\WEBHometasks\WEBHometask1\WEBHometask1_5\obj\Debug\netcoreapp2.1\WEBHometask1_5.AssemblyInfo.cs
+C:\Third semester 2019-2020 academic year\WEBHometasks\WEBHometask1\WEBHometask1_5\obj\Debug\netcoreapp2.1\WEBHometask1_5.dll
+C:\Third semester 2019-2020 academic year\WEBHometasks\WEBHometask1\WEBHometask1_5\obj\Debug\netcoreapp2.1\WEBHometask1_5.pdb
