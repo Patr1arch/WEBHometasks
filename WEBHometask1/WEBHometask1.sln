@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.902
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WEBHometask1.1", "WEBHometask1.1\WEBHometask1.1.csproj", "{783A13A8-06C4-4566-995A-98751798B635}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WEBHometask1.1", "WEBHometask1.1\WEBHometask1.1.csproj", "{783A13A8-06C4-4566-995A-98751798B635}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WEBHometask1_2", "WEBHometask1_2\WEBHometask1_2.csproj", "{4BBAC2B7-138E-44C6-A0B5-9C2FBB7263DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{783A13A8-06C4-4566-995A-98751798B635}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{783A13A8-06C4-4566-995A-98751798B635}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{783A13A8-06C4-4566-995A-98751798B635}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BBAC2B7-138E-44C6-A0B5-9C2FBB7263DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BBAC2B7-138E-44C6-A0B5-9C2FBB7263DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BBAC2B7-138E-44C6-A0B5-9C2FBB7263DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BBAC2B7-138E-44C6-A0B5-9C2FBB7263DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
