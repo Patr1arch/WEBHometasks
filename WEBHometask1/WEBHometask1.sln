@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WEBHometask1.1", "WEBHometa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WEBHometask1_2", "WEBHometask1_2\WEBHometask1_2.csproj", "{4BBAC2B7-138E-44C6-A0B5-9C2FBB7263DF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WEBHometask1_3", "WEBHometask1_3\WEBHometask1_3.csproj", "{3CD81C69-B21A-46EB-BD68-FFC466219EA0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{4BBAC2B7-138E-44C6-A0B5-9C2FBB7263DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BBAC2B7-138E-44C6-A0B5-9C2FBB7263DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BBAC2B7-138E-44C6-A0B5-9C2FBB7263DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CD81C69-B21A-46EB-BD68-FFC466219EA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CD81C69-B21A-46EB-BD68-FFC466219EA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CD81C69-B21A-46EB-BD68-FFC466219EA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CD81C69-B21A-46EB-BD68-FFC466219EA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
