@@ -13,6 +13,8 @@ namespace WEBHometask1_3
             Console.WriteLine("Input max el in this array");
             int max = Convert.ToInt32(Console.ReadLine());
 
+            if (max < min) (max, min) = (min, max);
+
             var rand = new Random();
 
             int[] array = new int[lenght];
