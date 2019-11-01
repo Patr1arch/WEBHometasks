@@ -21,7 +21,7 @@ namespace WEBHometask1_3
 
             for (var i = 0; i < lenght; i++)
             {
-                array[i] = rand.Next(min, max);
+                array[i] = rand.Next(min, max - 1);
             }
 
             Console.WriteLine("Array: ");
