@@ -17,7 +17,7 @@ namespace WebHometask2
             GenreManager myGenreManager = new GenreManager();
             
 
-            Stream.WriteLine("Welcome to Baranov's Cinema Model! Please ");
+            Stream.WriteLine("Welcome to Baranov's Cinema Model!");
             bool isExited = false;
             while (true)
             {
@@ -54,9 +54,60 @@ namespace WebHometask2
                                         myGenreManager.MakeGenre(id, name);
                                         Stream.WriteLine("Done! Would you like to add Genre Again? Y/N");
                                         if (Stream.ReadLine() == "N") isRepeated = false;
+                                        else isRepeated = true;
                                     } while (isRepeated);
-
                                     break;
+
+                                case "Edit":
+                                    isRepeated = true;
+                                    do
+                                    {
+                                        Stream.WriteLine("Input id");
+                                        int id = Convert.ToInt32(Stream.ReadLine());
+                                        Stream.WriteLine("Input edit name of Genre");
+                                        string editName = Stream.ReadLine();
+                                        myGenreManager.EditGenre(id, editName);
+                                        Stream.WriteLine("Done! Would you like to edit genre again? Y/N");
+                                        if (Stream.ReadLine() == "N") isRepeated = false;
+                                        else isRepeated = true;
+                                    } while (isRepeated);
+                                    break;
+
+                                case "GetAll":
+                                    var genres = myGenreManager.GetAllGenres();
+                                    foreach(var genre in genres)
+                                    {
+                                        Stream.WriteLine($"Id: {genre.id}, name: {genre.name}");
+                                    }
+                                    break;
+
+                                case "Get":
+                                    isRepeated = true;
+                                    do
+                                    {
+                                        Stream.WriteLine("Input id");
+                                        int id = Convert.ToInt32(Stream.ReadLine());
+                                        Genre thisGenre = myGenreManager.GetGenreById(id);
+                                        Stream.WriteLine($"Id: {thisGenre.id}, name: {thisGenre.name}");
+                                        Stream.WriteLine("Done! Would you like to get genre again? Y/N");
+                                        if (Stream.ReadLine() == "N") isRepeated = false;
+                                        else isRepeated = true;
+                                    } while (isRepeated);
+                                    break;
+
+                                case "Delete":
+                                    isRepeated = true;
+                                    do
+                                    {
+                                        Stream.WriteLine("Input id");
+                                        int id = Convert.ToInt32(Stream.ReadLine());
+                                        myGenreManager.DeleteGenre(id);
+                                        Stream.WriteLine("Done! Would you line to delete Genre again? Y/N");
+                                        if (Stream.ReadLine() == "N") isRepeated = false;
+                                        else isRepeated = true;
+                                    } while (isRepeated);
+                                    break;
+
                                 case "Leave":
                                     isLeaved = true;
                                     break;
@@ -106,7 +157,7 @@ namespace WebHometask2
             Stream.WriteLine($"If you want to delete {template} input 'Delete'");
             Stream.WriteLine($"If you want to get all {template}'s input 'GetAll'");
             Stream.WriteLine($"If you want to get {template} by id input 'Get'");
-            Stream.WriteLine($"If you want to leave {template} input 'Leave'");
+            Stream.WriteLine($"If you want to leave {template} Manager input 'Leave'");
         }
     }
 }

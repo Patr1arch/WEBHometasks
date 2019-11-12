@@ -23,9 +23,9 @@ namespace WebHometask2
         public void EditGenre(decimal id, string editName) => genreList[genreList.FindIndex(0, genreList.Count,
             g => g.id == id)].name = editName;
 
-        public string GetGenreById(decimal id)
+        public Genre GetGenreById(decimal id)
         {
-            return genreList.Find(g => g.id == id).name;
+            return genreList.Find(g => g.id == id);
         }
 
         public List<Genre> GetAllGenres()
