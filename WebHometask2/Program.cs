@@ -15,6 +15,18 @@ namespace WebHometask2
             // Making all Managers
 
             GenreManager myGenreManager = new GenreManager();
+            CompanyManager myCompanyManager = new CompanyManager();
+
+            // DEBUG: Some Genres and Companies in their lists
+            {
+                myGenreManager.MakeGenre(0, "Thriller");
+                myGenreManager.MakeGenre(1, "Horror");
+                myGenreManager.MakeGenre(2, "Comedy");
+
+                myCompanyManager.MakeCompany(0, "Warner Brothers");
+                myCompanyManager.MakeCompany(1, "Disney");
+                myCompanyManager.MakeCompany(2, "Universal Pictures");
+            }
             
 
             Stream.WriteLine("Welcome to Baranov's Cinema Model!");
@@ -24,7 +36,7 @@ namespace WebHometask2
                 Stream.WriteLine(separator);
                 if (isExited) break;
                 Stream.WriteLine("If you want to be Genre Manager input 'Genre'");
-
+                Stream.WriteLine("If you eant to be Company Manager input 'Company'");
 
                 Stream.WriteLine("If you want to exit input 'Exit'");
 
@@ -113,6 +125,90 @@ namespace WebHometask2
                                     break;
                             }
                         }                       
+                        break;
+
+                    case "Company":
+                        Stream.WriteLine("Now you Company manager");
+                        isLeaved = false;
+
+                        while (true)
+                        {
+                            if (isLeaved) break;
+                            PrintIdeas("Company");
+                            string action = Stream.ReadLine();
+                            switch (action)
+                            {
+                                case "Add":
+                                    bool isRepeated = true;
+                                    do
+                                    {                                      
+                                        Stream.WriteLine("Input id");
+                                        int id = Convert.ToInt32(Stream.ReadLine());
+                                        Stream.WriteLine("Input name of Company");
+                                        string name = Stream.ReadLine();
+                                        myCompanyManager.MakeCompany(id, name);
+                                        Stream.WriteLine("Done! Would you like to add Company Again? Y/N");
+                                        if (Stream.ReadLine() == "N") isRepeated = false;
+                                        else isRepeated = true;
+                                    } while (isRepeated);                                   
+                                    break;
+
+                                case "Edit":
+                                    isRepeated = true;
+                                    do
+                                    {
+                                        Stream.WriteLine("Input id");
+                                        int id = Convert.ToInt32(Stream.ReadLine());
+                                        Stream.WriteLine("Input edit name of Company that you'd like to edit");
+                                        string editName = Stream.ReadLine();
+                                        myCompanyManager.EditCompany(id, editName);
+                                        Stream.WriteLine("Done! Would you like to edit company again? Y/N");
+                                        if (Stream.ReadLine() == "N") isRepeated = false;
+                                        else isRepeated = true;
+                                    } while (isRepeated);
+                                    break;
+
+                                case "Delete":
+                                    isRepeated = true;
+                                    do
+                                    {
+                                        Stream.WriteLine("input id");
+                                        int id = Convert.ToInt32(Stream.ReadLine());
+                                        myCompanyManager.DeleteCompany(id);
+                                        Stream.WriteLine("Done! Would you like to delete another Company?Y/N");
+                                        if (Stream.ReadLine() == "N") isRepeated = false;
+                                        else isRepeated = true;
+                                    } while (isRepeated);
+                                    break;
+
+                                case "GetAll":
+                                    var companiesList = myCompanyManager.GetAllCompanies();
+                                    foreach(var company in companiesList)
+                                    {
+                                        Stream.WriteLine($"id: {company.id}, name: {company.name}");
+                                    }
+                                    break;
+
+                                case "Get":
+                                    isRepeated = true;
+                                    do
+                                    {
+                                        Stream.WriteLine("Input id");
+                                        int id = Convert.ToInt32(Stream.ReadLine());
+                                        Company thisCompany = myCompanyManager.GetCompanyById(id);
+                                        Stream.WriteLine($"Id: {thisCompany.id}, name: {thisCompany.name}");
+                                        Stream.WriteLine("Done! Would you like to get company again? Y/N");
+                                        if (Stream.ReadLine() == "N") isRepeated = false;
+                                        else isRepeated = true;
+                                    } while (isRepeated);
+                                    break;
+
+                                case "Leave":
+                                    isLeaved = true;
+                                    break;
+
+                            }
+                        }
                         break;
 
                     case "Exit":

@@ -21,12 +21,10 @@ namespace WebHometask2
         public void EditCompany(decimal id, string editName) => companyList[companyList.FindIndex(0, companyList.Count,
             g => g.id == id)].name = editName;
 
-        public void DeleteCompane(decimal id) => companyList.Remove(companyList.Find(g => g.id == id));
+        public void DeleteCompany(decimal id) => companyList.Remove(companyList.Find(g => g.id == id));
 
         public Company GetCompanyById(decimal id) { return companyList.Find(g => g.id == id); }
 
-        public List<Company> GetAllCompaniess() { return this.companyList;
-
-        }
+        public List<Company> GetAllCompanies() { return this.companyList; }
     }
 }
