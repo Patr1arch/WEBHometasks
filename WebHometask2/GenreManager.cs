@@ -6,7 +6,7 @@ namespace WebHometask2
 {
     public class GenreManager
     {
-        private List<Genre> genreList { get; }
+        private List<Genre> genreList;
         public void MakeGenre(decimal id, string name)
         {
             Genre genre = new Genre(id, name);

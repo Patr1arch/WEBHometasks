@@ -12,20 +12,28 @@ namespace WebHometask2
             //FilmManager.Film test1 = new FilmManager.Film(0, "Ababa");
             //FilmManager.Film test2 = new FilmManager.Film(1, "hhh");
 
-            // Making all Managers
+            // Initialization all Managers
 
             GenreManager myGenreManager = new GenreManager();
             CompanyManager myCompanyManager = new CompanyManager();
+            FilmManager myfilmManager = new FilmManager();
 
             // DEBUG: Some Genres and Companies in their lists
             {
                 myGenreManager.MakeGenre(0, "Thriller");
                 myGenreManager.MakeGenre(1, "Horror");
                 myGenreManager.MakeGenre(2, "Comedy");
+                myGenreManager.MakeGenre(3, "Drama");
 
                 myCompanyManager.MakeCompany(0, "Warner Brothers");
                 myCompanyManager.MakeCompany(1, "Disney");
                 myCompanyManager.MakeCompany(2, "Universal Pictures");
+
+                List<Genre> tmpGenres = new List<Genre>();
+                tmpGenres.Add(myGenreManager.GetGenreById(1));
+                tmpGenres.Add(myGenreManager.GetGenreById(2));
+                tmpGenres.Add(myGenreManager.GetGenreById(3));
+                myfilmManager.MakeFilm(0, "Joker", "18+", tmpGenres, myCompanyManager.GetCompanyById(0), 150, 1.5);
             }
             
 
@@ -36,7 +44,8 @@ namespace WebHometask2
                 Stream.WriteLine(separator);
                 if (isExited) break;
                 Stream.WriteLine("If you want to be Genre Manager input 'Genre'");
-                Stream.WriteLine("If you eant to be Company Manager input 'Company'");
+                Stream.WriteLine("If you want to be Company Manager input 'Company'");
+                Stream.WriteLine("If you want to be Film Manager input 'Film'");
 
                 Stream.WriteLine("If you want to exit input 'Exit'");
 
@@ -198,6 +207,95 @@ namespace WebHometask2
                                         Company thisCompany = myCompanyManager.GetCompanyById(id);
                                         Stream.WriteLine($"Id: {thisCompany.id}, name: {thisCompany.name}");
                                         Stream.WriteLine("Done! Would you like to get company again? Y/N");
+                                        if (Stream.ReadLine() == "N") isRepeated = false;
+                                        else isRepeated = true;
+                                    } while (isRepeated);
+                                    break;
+
+                                case "Leave":
+                                    isLeaved = true;
+                                    break;
+
+                            }
+                        }
+                        break;
+
+                    case "Film":
+                        Stream.WriteLine("Now you Film manager");
+                        isLeaved = false;
+
+                        while (true)
+                        {
+                            if (isLeaved) break;
+                            PrintIdeas("Film");
+                            string action = Stream.ReadLine();
+                            switch (action)
+                            {
+                                case "Add":
+                                    bool isRepeated = true;
+                                    do
+                                    {
+                                        Stream.WriteLine("Input id");
+                                        decimal id = Convert.ToInt32(Stream.ReadLine());
+
+                                        Stream.WriteLine("Input name");
+                                        string name = Stream.ReadLine();
+
+                                        Stream.WriteLine("Input Age Rate");
+                                        string ageRate = Stream.ReadLine();
+
+                                        Stream.WriteLine("Input count of genres in film");
+                                        decimal genresCount = Convert.ToInt32(Stream.ReadLine());
+                                        List<Genre> genres = new List<Genre>();
+                                        for (int i = 0; i < genresCount; i++)
+                                        {
+                                            Stream.WriteLine("Input id genre");
+                                            decimal idGenre = Convert.ToInt32(Stream.ReadLine());
+                                            genres.Add(myGenreManager.GetGenreById(idGenre));
+                                        }
+
+                                        Stream.WriteLine("Input company id");
+                                        decimal idCompany = Convert.ToInt32(Stream.ReadLine());
+                                        Company company = myCompanyManager.GetCompanyById(idCompany);
+
+                                        Stream.WriteLine("Input a duration");
+                                        decimal duration = Convert.ToInt32(Stream.ReadLine());
+
+                                        Stream.WriteLine("Input filmRatio");
+                                        double filmRartio = Convert.ToDouble(Stream.ReadLine());
+
+                                        myfilmManager.MakeFilm(id, name, ageRate, genres, company, duration, filmRartio);
+
+                                        Stream.WriteLine("Done! Would you like to add film again? Y/N");
+
+                                        if (Stream.ReadLine() == "N") isRepeated = false;
+                                        else isRepeated = true;
+                                    } while (isRepeated);
+                                    break;
+
+                                case "GetAll":
+                                    List <Film> films = myfilmManager.GetAllFilms();
+                                    foreach(var film in films)
+                                    {
+                                        Stream.WriteLine($"id: {film.id}, name: {film.name}, age rate: {film.ageRate}, genres:");
+                                        foreach(var genre in film.genres)
+                                        {
+                                            Stream.WriteLine($"{genre.name}");
+                                        }
+
+                                        Stream.WriteLine($"company: {film.company}, duration: {film.duration}, filmRatio: {film.filmaRatio}");
+                                        Stream.WriteLine();
+                                    }
+                                    break;
+                                case "Delete":
+                                    isRepeated = true;
+                                    do
+                                    {
+                                        Stream.WriteLine("input id");
+                                        decimal id = Convert.ToInt32(Stream.ReadLine());
+                                        myfilmManager.DeleteFilm(id);
+                                        Stream.WriteLine("Done! Would you like to delete film agin? Y/N");
+
                                         if (Stream.ReadLine() == "N") isRepeated = false;
                                         else isRepeated = true;
                                     } while (isRepeated);
