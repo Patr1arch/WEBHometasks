@@ -16,11 +16,12 @@ namespace WebHometask2
 
             GenreManager myGenreManager = new GenreManager();
             CompanyManager myCompanyManager = new CompanyManager();
-            FilmManager myfilmManager = new FilmManager();
+            FilmManager myFilmManager = new FilmManager();
             SeatManager mySeatManager = new SeatManager();
             HallManager myHallManager = new HallManager();
+            SessionManager mySessionManager = new SessionManager();
 
-            // DEBUG: Some Genres and Companies in their lists
+            // DEBUG: Some Genres and Companies in their lists, film and one hall
             {
                 myGenreManager.MakeGenre(0, "Thriller");
                 myGenreManager.MakeGenre(1, "Horror");
@@ -35,7 +36,17 @@ namespace WebHometask2
                 tmpGenres.Add(myGenreManager.GetGenreById(1));
                 tmpGenres.Add(myGenreManager.GetGenreById(2));
                 tmpGenres.Add(myGenreManager.GetGenreById(3));
-                myfilmManager.MakeFilm(0, "Joker", "18+", tmpGenres, myCompanyManager.GetCompanyById(0), 150, 1.5);
+                myFilmManager.MakeFilm(0, "Joker", "18+", tmpGenres, myCompanyManager.GetCompanyById(0), 150, 1.5);
+
+                List<Seat> tmpSeats = new List<Seat>();
+                for (var i = 1; i < 6; i++)
+                {
+                    for (var j = 1; j < 6; j++)
+                    {
+                        tmpSeats.Add(new Seat(i, j, 1));
+                    }
+                }
+                myHallManager.MakeHall(0, "Yuzniy", tmpSeats, 1);
             }
             
 
@@ -49,7 +60,8 @@ namespace WebHometask2
                 Stream.WriteLine("If you want to be Company Manager input 'Company'");
                 Stream.WriteLine("If you want to be Film Manager input 'Film'");
                 Stream.WriteLine("If you want to be Hall Manager input 'Hall'");
-                Stream.WriteLine("If you want to exit input 'Exit'");
+                Stream.WriteLine("If ypu want to be Session Manager input 'Session'");
+                Stream.WriteLine("If you want to exit input 'Exit'");                
 
                 string manager = Stream.ReadLine();
                 Stream.WriteLine(separator);
@@ -267,7 +279,7 @@ namespace WebHometask2
                                         Stream.WriteLine("Input filmRatio");
                                         double filmRartio = Convert.ToDouble(Stream.ReadLine());
 
-                                        myfilmManager.MakeFilm(id, name, ageRate, genres, company, duration, filmRartio);
+                                        myFilmManager.MakeFilm(id, name, ageRate, genres, company, duration, filmRartio);
 
                                         Stream.WriteLine("Done! Would you like to add film again? Y/N");
 
@@ -277,7 +289,7 @@ namespace WebHometask2
                                     break;
 
                                 case "GetAll":
-                                    List <Film> films = myfilmManager.GetAllFilms();
+                                    List <Film> films = myFilmManager.GetAllFilms();
                                     foreach(var film in films)
                                     {
                                         Stream.WriteLine($"id: {film.id}, name: {film.name}, age rate: {film.ageRate}, genres:");
@@ -297,7 +309,7 @@ namespace WebHometask2
                                     {
                                         Stream.WriteLine("input id");
                                         decimal id = Convert.ToInt32(Stream.ReadLine());
-                                        myfilmManager.DeleteFilm(id);
+                                        myFilmManager.DeleteFilm(id);
                                         Stream.WriteLine("Done! Would you like to delete film agin? Y/N");
 
                                         if (Stream.ReadLine() == "N") isRepeated = false;
@@ -361,6 +373,57 @@ namespace WebHometask2
                                     break;
                             }                         
                         }
+                        break;
+
+                    case "Session":
+                        Stream.WriteLine("Now you a Session Manager");                        
+                        isLeaved = false;
+                        while (true)
+                        {
+                            if (isLeaved) break;
+                            PrintIdeas("Session");
+                            string action = Stream.ReadLine();
+                            switch (action)
+                            {
+                                case "Add":
+                                    bool isRepeated = true;
+
+                                    do
+                                    {
+                                        Stream.WriteLine("Input id");
+                                        decimal id = Convert.ToInt32(Stream.ReadLine());
+                                        Stream.WriteLine("Input name of session");
+                                        string name = Stream.ReadLine();
+                                        Stream.WriteLine("Input date of start Session (dd.mm.yyyy)");
+                                        string dateStart = Stream.ReadLine();
+                                        Stream.WriteLine("Input time of start Session (hh.mm)");
+                                        string timeStart = Stream.ReadLine();
+                                        Stream.WriteLine("Input id of your hall");
+                                        Hall sessionHall = myHallManager.GetHallById(Convert.ToInt32(
+                                            Stream.ReadLine()));
+                                        Stream.WriteLine("Input id of your film");
+                                        Film sessionFilm = myFilmManager.GetFilmById(Convert.ToInt32(
+                                            Stream.ReadLine()));
+                                        Stream.WriteLine("Input an Session Ratio");
+                                        double sessionRatio = Convert.ToDouble(Stream.ReadLine());
+
+                                        mySessionManager.sessionsList.Add(new Session(
+                                            id, name, dateStart, timeStart, sessionHall, sessionFilm,
+                                            sessionRatio));
+
+                                        Stream.WriteLine("Done! Would you like to add new session? Y/N");
+                                        if (Stream.ReadLine() == "N") isRepeated = false;
+                                        else isRepeated = true;
+                                    } while (isRepeated);
+
+                                    break;
+
+                                case "Leave":
+                                    isLeaved = true;
+                                    break;
+                            }
+                        }
+
                         break;
 
                     case "Exit":

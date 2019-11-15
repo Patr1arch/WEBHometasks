@@ -23,5 +23,10 @@ namespace WebHometask2
         public List<Film> GetAllFilms() { return filmsList;  }
 
         public void DeleteFilm(decimal id) => filmsList.Remove(filmsList.Find(g => g.id == id));
+
+        public Film GetFilmById(decimal id)
+        {
+            return filmsList.Find(f => f.id == id);
+        }
     }
 }
