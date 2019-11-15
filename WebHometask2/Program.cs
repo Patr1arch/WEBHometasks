@@ -17,6 +17,8 @@ namespace WebHometask2
             GenreManager myGenreManager = new GenreManager();
             CompanyManager myCompanyManager = new CompanyManager();
             FilmManager myfilmManager = new FilmManager();
+            SeatManager mySeatManager = new SeatManager();
+            HallManager myHallManager = new HallManager();
 
             // DEBUG: Some Genres and Companies in their lists
             {
@@ -46,7 +48,7 @@ namespace WebHometask2
                 Stream.WriteLine("If you want to be Genre Manager input 'Genre'");
                 Stream.WriteLine("If you want to be Company Manager input 'Company'");
                 Stream.WriteLine("If you want to be Film Manager input 'Film'");
-
+                Stream.WriteLine("If you want to be Hall Manager input 'Hall'");
                 Stream.WriteLine("If you want to exit input 'Exit'");
 
                 string manager = Stream.ReadLine();
@@ -205,6 +207,7 @@ namespace WebHometask2
                                         Stream.WriteLine("Input id");
                                         int id = Convert.ToInt32(Stream.ReadLine());
                                         Company thisCompany = myCompanyManager.GetCompanyById(id);
+                                        if (thisCompany == null) break;
                                         Stream.WriteLine($"Id: {thisCompany.id}, name: {thisCompany.name}");
                                         Stream.WriteLine("Done! Would you like to get company again? Y/N");
                                         if (Stream.ReadLine() == "N") isRepeated = false;
@@ -283,10 +286,11 @@ namespace WebHometask2
                                             Stream.WriteLine($"{genre.name}");
                                         }
 
-                                        Stream.WriteLine($"company: {film.company}, duration: {film.duration}, filmRatio: {film.filmaRatio}");
+                                        Stream.WriteLine($"company: {film.company.name}, duration: {film.duration}, filmRatio: {film.filmaRatio}");
                                         Stream.WriteLine();
                                     }
                                     break;
+
                                 case "Delete":
                                     isRepeated = true;
                                     do
@@ -306,6 +310,56 @@ namespace WebHometask2
                                     break;
 
                             }
+                        }
+                        break;
+
+                    case "Hall":
+                        Stream.WriteLine("Now you a Hall manager");
+                        isLeaved = false;
+
+                        while (true)
+                        {
+                            if (isLeaved) break;
+                            PrintIdeas("Hall");
+                            string action = Stream.ReadLine();
+                            switch (action)
+                            {
+                                case "Add":
+                                    bool isRepeated = true;
+                                    do
+                                    {
+                                        Stream.WriteLine("Input id");
+                                        decimal id = Convert.ToInt32(Stream.ReadLine());
+                                        Stream.WriteLine("Input name of hall");
+                                        string name = Stream.ReadLine();
+                                        Stream.WriteLine("Input count of seats in your hall");
+                                        decimal seatCount = Convert.ToInt32(Stream.ReadLine());
+
+                                        List<Seat> hallSeats = new List<Seat>();
+                                        for (var i = 0; i < seatCount; i++)
+                                        {
+                                            Stream.WriteLine("Input row");
+                                            decimal seatRow = Convert.ToInt32(Stream.ReadLine());
+                                            Stream.WriteLine("Input placeCol");
+                                            decimal seatPlaceCol = Convert.ToInt32(Stream.ReadLine());                                    
+                                            Stream.WriteLine("Input seatRatio");
+                                            double seatRatio = Convert.ToDouble(Stream.ReadLine());
+                                            hallSeats.Add(mySeatManager.MakeSeat(seatRow, seatPlaceCol, seatRatio));
+                                        }
+
+                                        Stream.WriteLine("Input hallRatio");
+                                        double hallRatio = Convert.ToDouble(Stream.ReadLine());
+                                        myHallManager.MakeHall(id, name, hallSeats, hallRatio);
+                                        Stream.WriteLine("Done! Would you like to make new Hall? Y/N");
+                                        if (Stream.ReadLine() == "N") isRepeated = false;
+                                        else isRepeated = true;
+                                    } while (isRepeated);
+                                    break;
+
+                                case "Leave":
+                                    isLeaved = true;
+                                    break;
+                            }                         
                         }
                         break;
 
