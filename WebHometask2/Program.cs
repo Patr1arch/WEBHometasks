@@ -20,6 +20,7 @@ namespace WebHometask2
             SeatManager mySeatManager = new SeatManager();
             HallManager myHallManager = new HallManager();
             SessionManager mySessionManager = new SessionManager();
+            Cashier myCashier = new Cashier();
 
             // DEBUG: Some Genres and Companies in their lists, film and one hall
             {
@@ -61,6 +62,7 @@ namespace WebHometask2
                 Stream.WriteLine("If you want to be Film Manager input 'Film'");
                 Stream.WriteLine("If you want to be Hall Manager input 'Hall'");
                 Stream.WriteLine("If ypu want to be Session Manager input 'Session'");
+                Stream.WriteLine("If you want to be Cashier input 'Cashier'");
                 Stream.WriteLine("If you want to exit input 'Exit'");                
 
                 string manager = Stream.ReadLine();
@@ -424,6 +426,53 @@ namespace WebHometask2
                             }
                         }
 
+                        break;
+
+                    case "Cashier":
+                        Stream.WriteLine("Now you a Cashier");
+                        isLeaved = false;
+                        while (true)
+                        {
+                            if (isLeaved) break;
+                            Stream.WriteLine("If you want to view all valid Seats input 'getValid'");
+                            Stream.WriteLine("If you want to buy a ticket input 'Ticket'");
+                            Stream.WriteLine("If you want to leave Cashier input 'Leave'");
+
+                            string action = Stream.ReadLine();
+                            switch (action)
+                            {
+                                case "getValid":
+                                    Stream.WriteLine("Input a session id");
+                                    decimal id = Convert.ToDecimal(Stream.ReadLine());
+                                    var list = myCashier.getAllValidSeats(mySessionManager.
+                                        GetSessionById(id));
+                                    foreach(var i in list)
+                                    {
+                                        Stream.WriteLine($"row: {i.row}, col: {i.placeCol}");
+                                    }
+
+                                    break;
+
+                                case "Ticket":
+                                    Stream.WriteLine("Input a session id");
+                                    Session session = mySessionManager.GetSessionById(Convert.
+                                        ToDecimal(Stream.ReadLine()));
+                                    Stream.WriteLine("Input a row");
+                                    decimal row = Convert.ToDecimal(Stream.ReadLine());
+                                    Stream.WriteLine("Input a column");
+                                    decimal col = Convert.ToDecimal(Stream.ReadLine());
+
+                                    decimal cost = myCashier.CountCost(session, row, col);
+                                    Stream.WriteLine($"It was cost {cost}. Are you agree? Y/N");
+                                    if (Stream.ReadLine() == "Y") myCashier.SellTicket(session, row, col);
+                                    break;
+
+                                case "Leave":
+                                    isLeaved = true;
+                                    break;
+                            }
+
+                        }
                         break;
 
                     case "Exit":

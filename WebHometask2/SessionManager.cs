@@ -24,6 +24,9 @@ namespace WebHometask2
             return sessionsList;
         }
 
-
+        public Session GetSessionById(decimal id)
+        {
+            return sessionsList.Find(s => s.id == id);
+        }
     }
 }

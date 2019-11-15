@@ -23,6 +23,7 @@ namespace WebHometask2
             this.timeStart = timeStart;
             this.hall = hall;
             this.dateStart = dateStart;
+            this.film = film;
             seatBusy = new List<Tuple<Tuple<decimal, decimal>, bool>>();
             foreach(var i in this.hall.seats)
             {
