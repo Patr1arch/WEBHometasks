@@ -13,7 +13,7 @@ namespace WebHometask2
             halls = new List<Hall>();
         }
 
-        List<Hall> GetAllHalls()
+        public List<Hall> GetAllHalls()
         {
             return halls;
         }

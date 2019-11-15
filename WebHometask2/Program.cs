@@ -319,6 +319,69 @@ namespace WebHometask2
                                     } while (isRepeated);
                                     break;
 
+                                case "Get":
+                                    isRepeated = true;
+                                    do
+                                    {
+                                        Stream.WriteLine("input id");
+                                        Film film = myFilmManager.GetFilmById(Convert.
+                                            ToInt32(Stream.ReadLine()));
+                                        Stream.WriteLine($"id: {film.id}, name: {film.name}, age rate: {film.ageRate}, genres:");
+                                        foreach (var genre in film.genres)
+                                        {
+                                            Stream.WriteLine($"{genre.name}");
+                                        }
+
+                                        Stream.WriteLine($"company: {film.company.name}, duration: {film.duration}, filmRatio: {film.filmaRatio}");
+                                        Stream.WriteLine("Done! Would you like to get another film? Y/N");
+                                        if (Stream.ReadLine() == "N") isRepeated = false;
+                                        else isRepeated = true;
+
+                                    } while (isRepeated);
+
+                                    break;
+
+                                case "Edit":
+                                    isRepeated = true;
+                                    do
+                                    {
+                                        Stream.WriteLine("input id");
+                                        decimal id = Convert.ToInt32(Stream.ReadLine());
+                                        Stream.WriteLine("input new name");
+                                        string newName = Stream.ReadLine();
+                                        Stream.WriteLine("input new age rate");
+                                        string newAgeRate = Stream.ReadLine();
+
+                                        Stream.WriteLine("Input new count of genres in film");
+                                        decimal newGenresCount = Convert.ToInt32(Stream.ReadLine());
+                                        List<Genre> newGenres = new List<Genre>();
+                                        for (int i = 0; i < newGenresCount; i++)
+                                        {
+                                            Stream.WriteLine("Input id genre");
+                                            decimal idGenre = Convert.ToInt32(Stream.ReadLine());
+                                            newGenres.Add(myGenreManager.GetGenreById(idGenre));
+                                        }
+
+                                        Stream.WriteLine("Input new company id");
+                                        var newCompany = myCompanyManager.GetCompanyById(
+                                            Convert.ToInt32(Stream.ReadLine()));
+
+                                        Stream.WriteLine("Input new duration");
+                                        decimal newDuration = Convert.ToInt32(Stream.ReadLine());
+
+                                        Stream.WriteLine("Input new filmRatio");
+                                        double newRatio = Convert.ToDouble(Stream.ReadLine());
+
+                                        myFilmManager.EditFilm(id, newName, newAgeRate, newGenres,
+                                            newCompany, newDuration, newRatio);
+
+                                        Stream.WriteLine("Done! Would you like to edit a film again? Y/N");
+                                        if (Stream.ReadLine() == "N") isRepeated = false;
+                                        else isRepeated = true;
+                                    } while (isRepeated);
+
+                                    break;
+
                                 case "Leave":
                                     isLeaved = true;
                                     break;
@@ -365,6 +428,88 @@ namespace WebHometask2
                                         double hallRatio = Convert.ToDouble(Stream.ReadLine());
                                         myHallManager.MakeHall(id, name, hallSeats, hallRatio);
                                         Stream.WriteLine("Done! Would you like to make new Hall? Y/N");
+                                        if (Stream.ReadLine() == "N") isRepeated = false;
+                                        else isRepeated = true;
+                                    } while (isRepeated);
+                                    break;
+
+                                case "GetAll":
+                                    var list = myHallManager.GetAllHalls();
+                                    foreach (var i in list)
+                                    {
+                                        Stream.WriteLine($"id: {i.id}, name: {i.name}, hall ratio:{i.hallRatio}");
+                                        foreach (var k in i.seats)
+                                        {
+                                            Stream.WriteLine($"row: {k.row}, col: {k.placeCol}, seat ratio: {k.seatRatio}");
+                                        }
+                                    }
+                                    
+                                    break;
+
+                                case "Get":
+                                    isRepeated = true;
+                                    do
+                                    {
+                                        Stream.WriteLine("Input id");
+                                        decimal id = Convert.ToInt32(Stream.ReadLine());
+                                        var hall = myHallManager.GetHallById(id);
+                                        Stream.WriteLine($"id: {hall.id}, name: {hall.name}, hallRatio: {hall.hallRatio}");
+                                        foreach (var k in hall.seats)
+                                        {
+                                            Stream.WriteLine($"row: {k.row}, col: {k.placeCol}, seat ratio: {k.seatRatio}");
+                                        }
+
+                                        Stream.WriteLine("Done! Would you like to get another hall? Y/N");
+                                        if (Stream.ReadLine() == "N") isRepeated = false;
+                                        else isRepeated = true;
+                                    } while (isRepeated);
+                                    break;
+
+                                case "Edit":
+                                    isRepeated = true;
+                                    do
+                                    {
+                                        Stream.WriteLine("Input id");
+                                        decimal id = Convert.ToDecimal(Stream.ReadLine());
+
+                                        Stream.WriteLine("Input new name of hall");
+                                        string newName = Stream.ReadLine();
+
+                                        Stream.WriteLine("Input new Hall ratio");
+                                        double newRatio = Convert.ToDouble(Stream.ReadLine());
+
+                                        Stream.WriteLine("Input new count of seats in your hall");
+                                        decimal newSeatCount = Convert.ToInt32(Stream.ReadLine());
+
+                                        List<Seat> newHallSeats = new List<Seat>();
+                                        for (var i = 0; i < newSeatCount; i++)
+                                        {
+                                            Stream.WriteLine("Input row");
+                                            decimal seatRow = Convert.ToInt32(Stream.ReadLine());
+                                            Stream.WriteLine("Input placeCol");
+                                            decimal seatPlaceCol = Convert.ToInt32(Stream.ReadLine());
+                                            Stream.WriteLine("Input seatRatio");
+                                            double seatRatio = Convert.ToDouble(Stream.ReadLine());
+                                            newHallSeats.Add(mySeatManager.MakeSeat(seatRow, seatPlaceCol, seatRatio));
+                                        }
+
+                                        myHallManager.EditHall(id, newName, newHallSeats, newRatio);
+
+                                        Stream.WriteLine("Done! Would you like to edit another hall? Y/N");
+                                        if (Stream.ReadLine() == "N") isRepeated = false;
+                                        else isRepeated = true;
+
+                                    } while (isRepeated);
+                                    break;
+
+                                case "Delete":
+                                    isRepeated = true;
+                                    do
+                                    {
+                                        Stream.WriteLine("Input id");
+                                        decimal id = Convert.ToInt32(Stream.ReadLine());
+                                        myHallManager.DeleteHall(id);
+                                        Stream.WriteLine("Done! Would you like to delete another hall? Y/N");
                                         if (Stream.ReadLine() == "N") isRepeated = false;
                                         else isRepeated = true;
                                     } while (isRepeated);
@@ -418,6 +563,81 @@ namespace WebHometask2
                                         else isRepeated = true;
                                     } while (isRepeated);
 
+                                    break;
+
+                                case "GetAll":
+                                    var sessionList = mySessionManager.GetAllSessionsInList();
+                                    foreach(var i in sessionList)
+                                    {
+                                        Stream.WriteLine($"id: {i.id}, name: {i.name}, date start: {i.dateStart}");
+                                        Stream.WriteLine($"time start: {i.timeStart}, session ratio: {i.sessionRatio}");
+                                        Stream.WriteLine($"hall id: {i.hall.id}");
+                                    }
+                                    break;
+
+                                case "Edit":
+                                    isRepeated = true;
+                                    do
+                                    {
+                                        Stream.WriteLine("Input id");
+                                        decimal id = Convert.ToDecimal(Stream.ReadLine());
+
+                                        Stream.WriteLine("Input new name of session");
+                                        string newName = Stream.ReadLine();
+
+                                        Stream.WriteLine("Input new start date session");
+                                        string newStartDate = Stream.ReadLine();
+
+                                        Stream.WriteLine("Input new start time session");
+                                        string newStartTime = Stream.ReadLine();
+
+                                        Stream.WriteLine("Input id new hall");
+                                        Hall newHall = myHallManager.GetHallById(Convert.ToDecimal(
+                                            Stream.ReadLine()));
+
+                                        Stream.WriteLine("Input id new film");
+                                        Film newfilm = myFilmManager.GetFilmById(Convert.ToDecimal(
+                                            Stream.ReadLine()));
+
+                                        Stream.WriteLine("Input new session ratio");
+                                        double newRatio = Convert.ToDouble(Stream.ReadLine());
+
+                                        mySessionManager.EditSession(id, newName, newStartDate,
+                                            newStartTime, newHall, newfilm, newRatio);
+
+                                        Stream.WriteLine("Done! Would you like to delete another session? Y/N");
+                                        if (Stream.ReadLine() == "N") isRepeated = false;
+                                        else isRepeated = true;
+                                    } while (isRepeated);
+                                    break;
+
+                                case "Delete":
+                                    isRepeated = true;
+                                    do
+                                    {
+                                        Stream.WriteLine("Input id");
+                                        decimal id = Convert.ToDecimal(Stream.ReadLine());
+                                        mySessionManager.DeleteSession(id);
+                                        Stream.WriteLine("Done! Would you like to delete another session? Y/N");
+                                        if (Stream.ReadLine() == "N") isRepeated = false;
+                                        else isRepeated = true;
+                                    } while (isRepeated);
+                                    break;
+
+                                case "Get":
+                                    isRepeated = true;
+                                    do
+                                    {
+                                        Stream.WriteLine("Input id");
+                                        Session session = mySessionManager.GetSessionById(Convert.
+                                            ToDecimal(Stream.ReadLine()));
+                                        Stream.WriteLine($"id: {session.id}, name: {session.name}");
+                                        Stream.WriteLine($"start date: {session.dateStart}, time start: {session.timeStart}");
+                                        Stream.WriteLine($"hall id: {session.hall.name}, film id: {session.film.id}, session ratio: {session.sessionRatio}");
+                                        Stream.WriteLine("Done! Would you like to delete another session? Y/N");
+                                        if (Stream.ReadLine() == "N") isRepeated = false;
+                                        else isRepeated = true;
+                                    } while (isRepeated);
                                     break;
 
                                 case "Leave":

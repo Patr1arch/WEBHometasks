@@ -28,5 +28,16 @@ namespace WebHometask2
         {
             return filmsList.Find(f => f.id == id);
         }
+
+        public void EditFilm(decimal id, string name, string ageRate, List<Genre> genres,
+            Company company, decimal duration, double filmRatio)
+        {
+            filmsList.Find(f => f.id == id).name = name;
+            filmsList.Find(f => f.id == id).ageRate = ageRate;
+            filmsList.Find(f => f.id == id).genres = genres;
+            filmsList.Find(f => f.id == id).company = company;
+            filmsList.Find(f => f.id == id).duration = duration;
+            filmsList.Find(f => f.id == id).filmaRatio = filmRatio;
+        }
     }
 }
