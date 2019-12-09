@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.902
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebHometask3.1", "WebHometask3.1\WebHometask3.1.csproj", "{10C4127D-01D0-4E92-917A-63B4456143CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebHometask3.1", "WebHometask3.1\WebHometask3.1.csproj", "{10C4127D-01D0-4E92-917A-63B4456143CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebHometask3.2", "WebHometask3.2\WebHometask3.2.csproj", "{3C0DAAC4-3BA0-4254-9CBF-E9B25AEC9650}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebHometask3.2", "WebHometask3.2\WebHometask3.2.csproj", "{3C0DAAC4-3BA0-4254-9CBF-E9B25AEC9650}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebHometask3.3", "WebHometask3.3\WebHometask3.3.csproj", "{654EB462-7C9D-4289-84F3-82F79C6D0FB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebHometask3.3", "WebHometask3.3\WebHometask3.3.csproj", "{654EB462-7C9D-4289-84F3-82F79C6D0FB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebHometask3.4", "WebHometask3.4\WebHometask3.4.csproj", "{9481D6F1-FEA2-4FBA-BF1F-28998700C0BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebHometask3.4", "WebHometask3.4\WebHometask3.4.csproj", "{9481D6F1-FEA2-4FBA-BF1F-28998700C0BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebHometask3.5", "WebHometask3.5\WebHometask3.5.csproj", "{EA330CF7-BB0D-4AEB-BE8F-5AC72FD8E0A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{9481D6F1-FEA2-4FBA-BF1F-28998700C0BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9481D6F1-FEA2-4FBA-BF1F-28998700C0BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9481D6F1-FEA2-4FBA-BF1F-28998700C0BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA330CF7-BB0D-4AEB-BE8F-5AC72FD8E0A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA330CF7-BB0D-4AEB-BE8F-5AC72FD8E0A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA330CF7-BB0D-4AEB-BE8F-5AC72FD8E0A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA330CF7-BB0D-4AEB-BE8F-5AC72FD8E0A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
