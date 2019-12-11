@@ -1,0 +1,14 @@
+C:\Third semester 2019-2020 academic year\WEBHometasks\WebHometask3\WebHometask3.7\bin\Debug\netcoreapp2.1\WebHometask3.7.deps.json
+C:\Third semester 2019-2020 academic year\WEBHometasks\WebHometask3\WebHometask3.7\bin\Debug\netcoreapp2.1\WebHometask3.7.runtimeconfig.json
+C:\Third semester 2019-2020 academic year\WEBHometasks\WebHometask3\WebHometask3.7\bin\Debug\netcoreapp2.1\WebHometask3.7.runtimeconfig.dev.json
+C:\Third semester 2019-2020 academic year\WEBHometasks\WebHometask3\WebHometask3.7\bin\Debug\netcoreapp2.1\WebHometask3.7.dll
+C:\Third semester 2019-2020 academic year\WEBHometasks\WebHometask3\WebHometask3.7\bin\Debug\netcoreapp2.1\WebHometask3.7.pdb
+C:\Third semester 2019-2020 academic year\WEBHometasks\WebHometask3\WebHometask3.7\obj\Debug\netcoreapp2.1\WebHometask3.7.csproj.CoreCompileInputs.cache
+C:\Third semester 2019-2020 academic year\WEBHometasks\WebHometask3\WebHometask3.7\obj\Debug\netcoreapp2.1\WebHometask3.7.RazorAssemblyInfo.cache
+C:\Third semester 2019-2020 academic year\WEBHometasks\WebHometask3\WebHometask3.7\obj\Debug\netcoreapp2.1\WebHometask3.7.RazorAssemblyInfo.cs
+C:\Third semester 2019-2020 academic year\WEBHometasks\WebHometask3\WebHometask3.7\obj\Debug\netcoreapp2.1\WebHometask3.7.AssemblyInfoInputs.cache
+C:\Third semester 2019-2020 academic year\WEBHometasks\WebHometask3\WebHometask3.7\obj\Debug\netcoreapp2.1\WebHometask3.7.AssemblyInfo.cs
+C:\Third semester 2019-2020 academic year\WEBHometasks\WebHometask3\WebHometask3.7\obj\Debug\netcoreapp2.1\WebHometask3.7.RazorTargetAssemblyInfo.cache
+C:\Third semester 2019-2020 academic year\WEBHometasks\WebHometask3\WebHometask3.7\obj\Debug\netcoreapp2.1\WebHometask3.7.dll
+C:\Third semester 2019-2020 academic year\WEBHometasks\WebHometask3\WebHometask3.7\obj\Debug\netcoreapp2.1\WebHometask3.7.pdb
+C:\Third semester 2019-2020 academic year\WEBHometasks\WebHometask3\WebHometask3.7\obj\Debug\netcoreapp2.1\WebHometask3.7.csprojAssemblyReference.cache
