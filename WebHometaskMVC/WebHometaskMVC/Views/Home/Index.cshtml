@@ -1,0 +1,30 @@
+﻿@model IEnumerable<WebHometaskMVC.Models.Laptop>
+@{
+    ViewData["Title"] = "Каталог товаров";
+}
+
+    <html>
+    <head>
+        <title>Магазин ноутбуков</title>
+    </head>
+    <body>
+        <h3>Ноутбуки</h3>
+        <table class="table-condensed">
+            <tr>
+                <td>Модель</td>
+                <td>Производитель</td>
+                <td>Цена</td>
+                <td></td>
+            </tr>
+            @foreach (var laptop in Model)
+            {
+                <tr>
+                    <td>@laptop.Name</td>
+                    <td>@laptop.Company</td>
+                    <td>@laptop.Price</td>
+                    <td><a href="~/Home/Buy/@laptop.Id">Купить</a></td>
+                </tr>
+            }
+        </table>
+    </body>
+    </html>
