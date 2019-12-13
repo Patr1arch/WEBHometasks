@@ -14,11 +14,11 @@ namespace WebHometask4.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        FilmingContext _context;
-        public HomeController(ILogger<HomeController> logger, FilmingContext db)
+        //FilmingContext _context;
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _context = db;
+            //_context = db;
         }
 
         public IActionResult Index()

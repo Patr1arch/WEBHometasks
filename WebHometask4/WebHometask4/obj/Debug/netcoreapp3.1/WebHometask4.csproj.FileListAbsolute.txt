@@ -42,3 +42,5 @@ C:\Third semester 2019-2020 academic year\WEBHometasks\WebHometask4\WebHometask4
 C:\Third semester 2019-2020 academic year\WEBHometasks\WebHometask4\WebHometask4\obj\Debug\netcoreapp3.1\WebHometask4.MvcApplicationPartsAssemblyInfo.cache
 C:\Third semester 2019-2020 academic year\WEBHometasks\WebHometask4\WebHometask4\obj\Debug\netcoreapp3.1\Razor\Views\Genre\Details.cshtml.g.cs
 C:\Third semester 2019-2020 academic year\WEBHometasks\WebHometask4\WebHometask4\obj\Debug\netcoreapp3.1\Razor\Views\Genre\GenreNames.cshtml.g.cs
+C:\Third semester 2019-2020 academic year\WEBHometasks\WebHometask4\WebHometask4\obj\Debug\netcoreapp3.1\Razor\Views\Genre\Edit.cshtml.g.cs
+C:\Third semester 2019-2020 academic year\WEBHometasks\WebHometask4\WebHometask4\bin\Debug\netcoreapp3.1\web.config
