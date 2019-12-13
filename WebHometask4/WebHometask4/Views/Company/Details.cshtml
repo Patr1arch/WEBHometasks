@@ -1,0 +1,21 @@
+﻿@model WebHometask4.Models.Company
+@{
+    ViewData["Title"] = "Компания в деталях";
+}
+
+<h2> Подробное описание компании</h2>
+<table class="table-condensed">
+    <tr>
+        <td> Id </td>
+        <td> Название</td>
+    </tr>
+    <tr>
+        <td>
+            @Model.Id
+        </td>
+        <td>
+            @Model.Name
+        </td>
+    </tr>
+</table>
+<button class="btn btn-primary" onclick="location.href = '/Company/CompanyNames';"> Вернуться в список </button>

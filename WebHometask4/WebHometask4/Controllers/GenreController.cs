@@ -53,20 +53,26 @@ namespace WebHometask4.Controllers
         }
 
         [AcceptVerbs("POST", "PUT")]
-        public IActionResult Edit(Genre genre)
+        public IActionResult Edit(Genre genre, int oldId, string oldName)
         {
             if (genre == null || genre.Name == null) return BadRequest();
 
-            if (_context.Genres.ToList().Find(g => g.Name == genre.Name) == null && 
-               _context.Genres.ToList().FindAll(g => g.Id == genre.Id).Count <= 1) 
+            _context.Genres.Remove(_context.Genres.ToList().Find(g => g.Id == oldId));
+            _context.SaveChanges();
+            if (_context.Genres.ToList().Find(g => g.Name == genre.Name) == null &&
+               _context.Genres.ToList().Find(g => g.Id == genre.Id) == null)
             {
-                //_context.Update(genre); // Не работает
-                _context.Remove(_context.Genres.ToList().Find(g => g.Id == genre.Id));
-                _context.Add(genre);
+                //_context.Companies.Update(company); // Не работает                
+                _context.Genres.Add(genre);
                 _context.SaveChanges();
                 return Redirect("~/Genre/GenreNames");
             }
-            else return BadRequest();
+            else
+            {
+                _context.Add(new Genre { Id = oldId, Name = oldName });
+                _context.SaveChanges();
+                return BadRequest();
+            }
         }
 
         [AcceptVerbs("POST", "DELETE", "GET")]
