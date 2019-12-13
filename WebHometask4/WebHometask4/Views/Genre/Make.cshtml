@@ -1,25 +1,24 @@
-﻿@model WebHometask4.Models.Genre
-@{
-    ViewData["Title"] = "Редактирование жанра";
+﻿@{
+    ViewData["Title"] = "Добавить жанр";
 }
 
 <h2> Редактирование жанра </h2>
-<form action='@Url.Action("Edit", "Genre", new { id = @Model.Id} )' method="post">
+<form method="post">
     <div class="form-group">
         <label for="Id" class="col-md-2 control-label">Id:</label>
         <div class="col-md-4">
-            <input type="text" name="Id" class="form-control" value="@Model.Id" />
+            <input type="text" name="Id" class="form-control" />
         </div>
     </div>
     <div class="form-group">
         <label for="Name" class="col-md-2 control-label">Имя:</label>
         <div class="col-md-4">
-            <input type="text" name="Name" class="form-control" value="@Model.Name" />
+            <input type="text" name="Name" class="form-control"/>
         </div>
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-light" value="Отправить на изменение" />
+            <input type="submit" class="btn btn-light" value="Создать" />
         </div>
     </div>
 </form>

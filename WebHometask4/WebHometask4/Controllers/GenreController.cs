@@ -19,10 +19,13 @@ namespace WebHometask4.Controllers
         [HttpGet]
         public IActionResult GenreNames(string? pattern)
         {
-            //if (pattern == null)
-            //{
+            if (pattern == null)
+            {
                 return View(_context.Genres.ToList());
-            //}
+            }
+            List<Genre> genres = _context.Genres.Where(elem => elem.Id.ToString().Contains(pattern)
+           || elem.Name.Contains(pattern)).ToList();
+            return View(genres);
         }
 
         [HttpGet]
@@ -52,7 +55,7 @@ namespace WebHometask4.Controllers
         [AcceptVerbs("POST", "PUT")]
         public IActionResult Edit(Genre genre)
         {
-            if (genre == null) return BadRequest();
+            if (genre == null || genre.Name == null) return BadRequest();
 
             if (_context.Genres.ToList().Find(g => g.Name == genre.Name) == null && 
                _context.Genres.ToList().FindAll(g => g.Id == genre.Id).Count <= 1) 
@@ -64,6 +67,37 @@ namespace WebHometask4.Controllers
                 return Redirect("~/Genre/GenreNames");
             }
             else return BadRequest();
+        }
+
+        [AcceptVerbs("POST", "DELETE", "GET")]
+        public IActionResult Delete(int? id)
+        {         
+            if (id == null) return BadRequest();
+            var genre = _context.Genres.ToList().Find(g => g.Id == id);
+            if (genre == null) return BadRequest();
+
+            _context.Remove(genre);
+            _context.SaveChanges();
+            return Redirect("~/Genre/GenreNames");
+        }
+
+        [HttpGet] 
+        public IActionResult Make()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Make(Genre genre)
+        {
+            if (genre == null) return BadRequest();
+            if (genre.Name == null) return BadRequest();
+
+            if (_context.Genres.ToList().Find(g => g.Id == genre.Id) != null ||
+                _context.Genres.ToList().Find(g => g.Name == genre.Name) != null) return BadRequest();
+            _context.Add(genre);
+            _context.SaveChanges();
+            return Redirect("~/Genre/GenreNames");
         }
     }
 }
