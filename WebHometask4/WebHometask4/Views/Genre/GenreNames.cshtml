@@ -1,0 +1,22 @@
+﻿@model IEnumerable<WebHometask4.Models.Genre>
+@{
+    ViewData["Title"] = "Жанры";
+}
+
+<h2> Краткий список жанров</h2>
+<table class="table-condensed">
+    <tr>
+        <td> Название </td>
+    </tr>
+    @foreach (var genre in Model){ 
+        <tr>
+            <td> @genre.Name</td>
+            <td>
+             <button class="btn btn-primary" onclick="location.href = '/Genre/Details/@genre.Id';"> Details </button>
+            </td>
+            @*<td>
+                <input class="btn btn-secondary" type="submit" value="Details"/>
+            </td>*@
+        </tr>
+    }
+</table>
