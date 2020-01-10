@@ -12,10 +12,13 @@ namespace WebHometask4.Models
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Company> Companies { get; set; }
 
+        public DbSet<Film> Films { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Genre>().HasKey(x => x.Id);
             modelBuilder.Entity<Company>().HasKey(x => x.Id);
+            modelBuilder.Entity<Film>().HasKey(x => x.Id);
             base.OnModelCreating(modelBuilder);
         }
 
