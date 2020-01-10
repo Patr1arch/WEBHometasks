@@ -3,7 +3,9 @@
 }
 
 <h2> Создание компании </h2>
-<form method="post">
+@*<form method="post">*@
+@using (Html.BeginForm("Make", "Company"))
+{
     @*<div class="form-group">
         <label for="Id" class="col-md-2 control-label">Id:</label>
         <div class="col-md-4">
@@ -13,7 +15,8 @@
     <div class="form-group">
         <label for="Name" class="col-md-2 control-label">Имя:</label>
         <div class="col-md-4">
-            <input type="text" name="Name" class="form-control" />
+            @Html.TextBox("Name", "", new { type="text" })
+            @*<input type="text" name="Name" class="form-control" />*@
         </div>
     </div>
     <div class="form-group">
@@ -21,6 +24,7 @@
             <input type="submit" class="btn btn-light" value="Создать" />
         </div>
     </div>
-</form>
+}
+@*</form>*@
 
-<button class="btn btn-primary" onclick="location.href = '/Company/CompanyNames';"> Вернуться в список </button>
+<a class="btn btn-primary" asp-controller="Company" asp-action="CompanyNames" > Вернуться в список </a>

@@ -3,11 +3,14 @@
     ViewData["Title"] = "Kомпании";
 }
 
-<form onclick="'@Url.Action("CompanyNames", "Company")';" method="get">
+@*<form onclick="'@Url.Action("CompanyNames", "Company")';" method="get">*@
+@using (Html.BeginForm("CompanyNames", "Company", FormMethod.Get))
+{
     <div class="form-group">
         <label for="Pattern" class="col-md-2 control-label">Pattern:</label>
         <div class="col-md-4">
-            <input type="text" name="Pattern" class="form-control" />
+            @*<input type="text" name="Pattern" class="form-control" />*@
+            @Html.TextBox("Pattern", "", new { type = "text"})
         </div>
     </div>
     <div class="form-group">
@@ -15,7 +18,8 @@
             <input type="submit" class="btn btn-light" value="Получить список" />
         </div>
     </div>
-</form>
+}
+@*</form>*@
 <h2> Краткий список компаний</h2>
 <table class="table-condensed">
     <tr>
@@ -24,17 +28,17 @@
     @foreach (var company in Model)
     {
         <tr>
-            <td> @company.Name</td>
+            <td> @company.Name </td>
             <td>
-                <button class="btn btn-primary" onclick="location.href = '/Company/Details/@company.Id';"> Details </button>
+                <a class="btn btn-primary" asp-controller="Company" asp-action="Details" asp-route-id="@company.Id" > Details </a>
             </td>
             <td>
-                <button class="btn btn-secondary" onclick="location.href = '/Company/Edit/@company.Id';"> Edit </button>
+                <a class="btn btn-secondary" asp-controller="Company" asp-action="Edit" asp-route-id="@company.Id" > Edit </a>
             </td>
             <td>
-                <button class="btn btn-danger" value="@company.Id" onclick="location.href = '@Url.Action("Delete", "Company", new { id = company.Id} )';"> Delete </button>
+                <a class="btn btn-danger" asp-controller="Company" asp-action="Delete" asp-route-id="@company.Id" > Delete </a>
             </td>
         </tr>
     }
 </table>
-<button class="btn btn-success" onclick="location.href = '@Url.Action("Make", "Company")';"> Создать новую компанию </button>
+<a class="btn btn-success" asp-controller="Company" asp-action="Make" > Создать новую компанию </a>

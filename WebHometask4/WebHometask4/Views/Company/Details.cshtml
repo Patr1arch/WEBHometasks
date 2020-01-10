@@ -12,14 +12,14 @@
     </tr>
     <tr>
         <td>
-            @Model.Id
+            @Html.Display("Id")
         </td>
         <td>
-            @Model.Name
+            @Html.Display("Name")
         </td>
         <td>
-            @Model.Lifetime
+            @Html.Display("Lifetime")
         </td>
     </tr>
 </table>
-<button class="btn btn-primary" onclick="location.href = '/Company/CompanyNames';"> Вернуться в список </button>
+<a class="btn btn-primary" asp-controller="Company" asp-action="CompanyNames" > Вернуться в список </a>

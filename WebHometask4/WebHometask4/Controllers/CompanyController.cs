@@ -51,8 +51,8 @@ namespace WebHometask4.Controllers
                 var date = DateTime.Now.Subtract(com.CreationDate);
                 string lifetime = "";
                 if (Math.Floor(date.TotalDays) > 0) lifetime += Math.Floor(date.TotalDays).ToString() + "дня ";
-                if (Math.Floor(date.TotalHours) > 0) lifetime += Math.Floor(date.TotalHours).ToString() + "часа ";
-                if (Math.Floor(date.TotalMinutes) > 0) lifetime += Math.Floor(date.TotalMinutes).ToString() + "минут(ы)";
+                if (Math.Floor(date.TotalHours) > 0) lifetime += (Math.Floor(date.TotalHours) % 24).ToString() + "часа ";
+                if (Math.Floor(date.TotalMinutes) > 0) lifetime += (Math.Floor(date.TotalMinutes) % 60).ToString() + "минут(ы)";
 
                 CompanyModel model = new CompanyModel { Id = com.Id, Name = com.Name, Lifetime = lifetime };
                 return View(model);
