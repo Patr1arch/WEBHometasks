@@ -126,6 +126,17 @@ namespace WebHometask4.Controllers
 
             if (_context.Companies.ToList().Find(c => c.Id == company.Id) != null ||
                 _context.Companies.ToList().Find(c => c.Name == company.Name) != null) return BadRequest();
+
+            int defaultId = _context.Companies.ToList().Count + 1;
+            for (int i = 1; i < defaultId; i++)
+            {
+                if (_context.Companies.ToList().Find(c => c.Id == i) == null)
+                {
+                    defaultId = i;
+                    break;
+                }
+            }
+            company.Id = defaultId;
             company.CreationDate = DateTime.Now;
             _context.Add(company);
             _context.SaveChanges();

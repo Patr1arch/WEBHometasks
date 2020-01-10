@@ -114,6 +114,16 @@ namespace WebHometask4.Controllers
 
             if (_context.Genres.ToList().Find(g => g.Id == genre.Id) != null ||
                 _context.Genres.ToList().Find(g => g.Name == genre.Name) != null) return BadRequest();
+            int defaultId = _context.Genres.ToList().Count + 1;
+            for (int i = 1; i < defaultId; i++)
+            {
+                if (_context.Genres.ToList().Find(g => g.Id == i) == null)
+                {
+                    defaultId = i;
+                    break;
+                }
+            }
+            genre.Id = defaultId;
             genre.CreationDate = DateTime.Now;
             _context.Add(genre);
             _context.SaveChanges();
