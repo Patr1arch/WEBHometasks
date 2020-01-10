@@ -14,17 +14,21 @@ namespace WebHometask4.Controllers
     public class CompanyController : Controller
     {
         FilmingContext _context;
-        public CompanyController(FilmingContext context) => _context = context;
+        public CompanyController(FilmingContext context)
+        {
+            _context = context;
+        }
 
         [HttpGet]
         public IActionResult CompanyNames(string? pattern)
         {
+            ViewBag.Genres = new List<Genre>(_context.Genres.ToList());
             if (pattern == null)
             {
                 return View(_context.Companies.ToList());
             }
             List<Company> companies = _context.Companies.Where(elem => elem.Id.ToString().Contains(pattern)
-            || elem.Name.Contains(pattern)).ToList();
+            || elem.Name.Contains(pattern)).ToList();          
 
             //List<CompanyModel> companyModels = new List<CompanyModel>();
             //foreach (var com in companies)
@@ -45,7 +49,7 @@ namespace WebHometask4.Controllers
         {
             if (id == null) return NotFound();
             Company com = _context.Companies.ToList().Find(c => c.Id == id);
-
+            ViewBag.Genres = new List<Genre>(_context.Genres.ToList());
             if (com != null)
             {
                 var date = DateTime.Now.Subtract(com.CreationDate);
@@ -65,6 +69,7 @@ namespace WebHometask4.Controllers
         {
             if (id == null) return NotFound();
             var obj = _context.Companies.ToList().Find(c => c.Id == id);
+            ViewBag.Genres = new List<Genre>(_context.Genres.ToList());
             if (obj != null)
             {
                 return View(obj);
@@ -80,6 +85,7 @@ namespace WebHometask4.Controllers
             company.CreationDate = CreationDate;
             _context.Companies.Update(company); // Не работает
             _context.SaveChanges();
+            ViewBag.Genres = new List<Company>(_context.Companies.ToList());
             return Redirect("~/Company/CompanyNames");
 
             //_context.Companies.Remove(_context.Companies.ToList().Find(c=> c.Id == oldId));
@@ -109,12 +115,14 @@ namespace WebHometask4.Controllers
 
             _context.Companies.Remove(company);
             _context.SaveChanges();
+            ViewBag.Genres = new List<Genre>(_context.Genres.ToList());
             return Redirect("~/Company/CompanyNames");
         }
 
         [HttpGet]
         public IActionResult Make()
         {
+            ViewBag.Genres = new List<Genre>(_context.Genres.ToList());
             return View();
         }
 
@@ -140,6 +148,7 @@ namespace WebHometask4.Controllers
             company.CreationDate = DateTime.Now;
             _context.Add(company);
             _context.SaveChanges();
+            ViewBag.Genres = new List<Genre>(_context.Genres.ToList());
             return Redirect("~/Company/CompanyNames");
         }
     }

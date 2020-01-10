@@ -2,6 +2,17 @@
     ViewData["Title"] = "Добавить компанию";
 }
 
+<ul>
+    <li>
+        <select>
+            @foreach (var gnr in ViewBag.Genres)
+            {
+                <option>@gnr.Name</option>
+            }
+        </select>
+    </li>
+ </ul>
+
 <h2> Создание компании </h2>
 @*<form method="post">*@
 @using (Html.BeginForm("Make", "Company"))

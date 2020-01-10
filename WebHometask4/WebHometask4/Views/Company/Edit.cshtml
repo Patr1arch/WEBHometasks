@@ -2,7 +2,16 @@
 @{
     ViewData["Title"] = "Редактирование компании";
 }
-
+<ul>
+    <li>
+        <select>
+            @foreach (var gnr in ViewBag.Genres)
+            {
+                <option>@gnr.Name</option>
+            }
+        </select>
+    </li>
+ </ul>
     <h2> Редактирование компании </h2>
     @*<form action='@Url.Action("Edit", "Company", new { id = @Model.Id} )' method="post">*@
     @using (Html.BeginForm("Edit", "Company", new { id = @Model.Id}, FormMethod.Post))

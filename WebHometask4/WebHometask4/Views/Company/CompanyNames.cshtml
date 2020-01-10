@@ -3,6 +3,16 @@
     ViewData["Title"] = "Kомпании";
 }
 
+<ul>
+    <li>
+        <select>
+            @foreach (var gnr in ViewBag.Genres)
+            {
+                <option>@gnr.Name</option>
+            }
+        </select>
+    </li>
+ </ul>
 @*<form onclick="'@Url.Action("CompanyNames", "Company")';" method="get">*@
 @using (Html.BeginForm("CompanyNames", "Company", FormMethod.Get))
 {
