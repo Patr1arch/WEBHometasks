@@ -58,7 +58,8 @@ namespace WebHometask4.Controllers
                 if (Math.Floor(date.TotalHours) > 0) lifetime += (Math.Floor(date.TotalHours) % 24).ToString() + "часа ";
                 if (Math.Floor(date.TotalMinutes) > 0) lifetime += (Math.Floor(date.TotalMinutes) % 60).ToString() + "минут(ы)";
 
-                CompanyModel model = new CompanyModel { Id = com.Id, Name = com.Name, Lifetime = lifetime };
+                CompanyModel model = new CompanyModel { Name = com.Name, Lifetime = lifetime };
+                ViewBag.CompanyId = com.Id;
                 return View(model);
             }
             else return NotFound();
@@ -127,13 +128,13 @@ namespace WebHometask4.Controllers
         }
 
         [HttpPost]
-        public IActionResult Make(Company company)
+        public IActionResult Make(CompanyModel companyModel)
         {
-            if (company == null) return BadRequest();
-            if (company.Name == null) return BadRequest();
+            if (companyModel == null) return BadRequest();
+            if (companyModel.Name == null) return BadRequest();
 
-            if (_context.Companies.ToList().Find(c => c.Id == company.Id) != null ||
-                _context.Companies.ToList().Find(c => c.Name == company.Name) != null) return BadRequest();
+            if (//_context.Companies.ToList().Find(c => c.Id == company.Id) != null ||
+                _context.Companies.ToList().Find(c => c.Name == companyModel.Name) != null) return BadRequest();
 
             int defaultId = _context.Companies.ToList().Count + 1;
             for (int i = 1; i < defaultId; i++)
@@ -144,8 +145,7 @@ namespace WebHometask4.Controllers
                     break;
                 }
             }
-            company.Id = defaultId;
-            company.CreationDate = DateTime.Now;
+            Company company = new Company { Id = defaultId, Name = companyModel.Name, CreationDate = DateTime.Now };
             _context.Add(company);
             _context.SaveChanges();
             ViewBag.Genres = new List<Genre>(_context.Genres.ToList());

@@ -43,8 +43,8 @@ namespace WebHometask4.Controllers
                 if (Math.Floor(date.TotalDays) > 0) lifetime += Math.Floor(date.TotalDays).ToString() + "дня ";
                 if (Math.Floor(date.TotalHours) > 0) lifetime += Math.Floor(date.TotalHours).ToString() + "часа ";
                 if (Math.Floor(date.TotalMinutes) > 0) lifetime += Math.Floor(date.TotalMinutes).ToString() + "минут(ы)";
-
-                GenreModel model = new GenreModel { Id = gnr.Id, Name = gnr.Name, Lifetime = lifetime };
+                ViewBag.GenreId = gnr.Id;
+                GenreModel model = new GenreModel { Name = gnr.Name, Lifetime = lifetime };
                 return View(model);
             }
             else return NotFound();
@@ -113,14 +113,14 @@ namespace WebHometask4.Controllers
         }
 
         [HttpPost]
-        public IActionResult Make(Genre genre)
+        public IActionResult Make(GenreModel genreModel)
         {
             ViewBag.Companies = new List<Company>(_context.Companies.ToList());
-            if (genre == null) return BadRequest();
-            if (genre.Name == null) return BadRequest();
+            if (genreModel == null) return BadRequest();
+            if (genreModel.Name == null) return BadRequest();
 
-            if (_context.Genres.ToList().Find(g => g.Id == genre.Id) != null ||
-                _context.Genres.ToList().Find(g => g.Name == genre.Name) != null) return BadRequest();
+            if (//_context.Genres.ToList().Find(g => g.Id == genre.Id) != null ||
+                _context.Genres.ToList().Find(g => g.Name == genreModel.Name) != null) return BadRequest();
             int defaultId = _context.Genres.ToList().Count + 1;
             for (int i = 1; i < defaultId; i++)
             {
@@ -130,8 +130,7 @@ namespace WebHometask4.Controllers
                     break;
                 }
             }
-            genre.Id = defaultId;
-            genre.CreationDate = DateTime.Now;
+            Genre genre = new Genre { Id = defaultId, Name = genreModel.Name, CreationDate = DateTime.Now };
             _context.Add(genre);
             _context.SaveChanges();
             return Redirect("~/Genre/GenreNames");

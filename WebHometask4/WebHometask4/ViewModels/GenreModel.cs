@@ -7,7 +7,6 @@ namespace WebHometask4.ViewModels
 {
     public class GenreModel
     {
-        public decimal Id { get; set; }
         public string Name { get; set; }
         public string Lifetime { get; set; }
     }
