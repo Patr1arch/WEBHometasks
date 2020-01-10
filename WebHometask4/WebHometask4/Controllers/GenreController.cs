@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WebHometask4.Models;
 using Microsoft.EntityFrameworkCore;
+using WebHometask4.ViewModels;
 
 
 namespace WebHometask4.Controllers
@@ -32,10 +33,17 @@ namespace WebHometask4.Controllers
         public IActionResult Details(int? id)
         {
             if (id == null) return NotFound();
-            var obj = _context.Genres.ToList().Find(g => g.Id == id);
-            if (obj != null)
+            Genre gnr = _context.Genres.ToList().Find(g => g.Id == id);
+            if (gnr != null)
             {
-                return View(obj);
+                var date = DateTime.Now.Subtract(gnr.CreationDate);
+                string lifetime = "";
+                if (Math.Floor(date.TotalDays) > 0) lifetime += Math.Floor(date.TotalDays).ToString() + "дня ";
+                if (Math.Floor(date.TotalHours) > 0) lifetime += Math.Floor(date.TotalHours).ToString() + "часа ";
+                if (Math.Floor(date.TotalMinutes) > 0) lifetime += Math.Floor(date.TotalMinutes).ToString() + "минут(ы)";
+
+                GenreModel model = new GenreModel { Id = gnr.Id, Name = gnr.Name, Lifetime = lifetime };
+                return View(model);
             }
             else return NotFound();
         }
@@ -53,26 +61,31 @@ namespace WebHometask4.Controllers
         }
 
         [AcceptVerbs("POST", "PUT")]
-        public IActionResult Edit(Genre genre, int oldId, string oldName)
+        public IActionResult Edit(Genre genre, DateTime CreationDate)
         {
             if (genre == null || genre.Name == null) return BadRequest();
 
-            _context.Genres.Remove(_context.Genres.ToList().Find(g => g.Id == oldId));
+            genre.CreationDate = CreationDate;
+            _context.Update(genre);
             _context.SaveChanges();
-            if (_context.Genres.ToList().Find(g => g.Name == genre.Name) == null &&
-               _context.Genres.ToList().Find(g => g.Id == genre.Id) == null)
-            {
-                //_context.Companies.Update(company); // Не работает                
-                _context.Genres.Add(genre);
-                _context.SaveChanges();
-                return Redirect("~/Genre/GenreNames");
-            }
-            else
-            {
-                _context.Add(new Genre { Id = oldId, Name = oldName });
-                _context.SaveChanges();
-                return BadRequest();
-            }
+            return Redirect("~/Genre/GenreNames");
+
+            //_context.Genres.Remove(_context.Genres.ToList().Find(g => g.Id == oldId));
+            //_context.SaveChanges();
+            //if (_context.Genres.ToList().Find(g => g.Name == genre.Name) == null &&
+            //   _context.Genres.ToList().Find(g => g.Id == genre.Id) == null)
+            //{
+            //    //_context.Companies.Update(company); // Не работает                
+            //    _context.Genres.Add(genre);
+            //    _context.SaveChanges();
+            //    return Redirect("~/Genre/GenreNames");
+            //}
+            //else
+            //{
+            //    _context.Add(new Genre { Id = oldId, Name = oldName });
+            //    _context.SaveChanges();
+            //    return BadRequest();
+            //}
         }
 
         [AcceptVerbs("POST", "DELETE", "GET")]
@@ -101,6 +114,7 @@ namespace WebHometask4.Controllers
 
             if (_context.Genres.ToList().Find(g => g.Id == genre.Id) != null ||
                 _context.Genres.ToList().Find(g => g.Name == genre.Name) != null) return BadRequest();
+            genre.CreationDate = DateTime.Now;
             _context.Add(genre);
             _context.SaveChanges();
             return Redirect("~/Genre/GenreNames");

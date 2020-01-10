@@ -14,12 +14,14 @@ namespace WebHometask4
                     new Genre
                     {
                         Id = 1,
-                        Name = "Action"
+                        Name = "Action",
+                        CreationDate = DateTime.Now
                     },
                     new Genre
                     {
                         Id = 2,
-                        Name = "Horror"
+                        Name = "Horror",
+                        CreationDate = DateTime.Now
                     }
                     );
                 context.SaveChanges();
