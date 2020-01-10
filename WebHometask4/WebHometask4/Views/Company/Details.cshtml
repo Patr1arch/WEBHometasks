@@ -1,4 +1,4 @@
-﻿@model WebHometask4.Models.Company
+﻿@model WebHometask4.ViewModels.CompanyModel
 @{
     ViewData["Title"] = "Компания в деталях";
 }
@@ -8,6 +8,7 @@
     <tr>
         <td> Id </td>
         <td> Название</td>
+        <td> С создания прошло</td>
     </tr>
     <tr>
         <td>
@@ -15,6 +16,9 @@
         </td>
         <td>
             @Model.Name
+        </td>
+        <td>
+            @Model.Lifetime
         </td>
     </tr>
 </table>

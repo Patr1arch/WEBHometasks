@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 
-namespace WebHometask4.Models
+namespace WebHometask4.ViewModels
 {
-    public class Company
+    public class CompanyModel
     {
-        [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        public DateTime CreationDate { get; set; }
+        public string Lifetime { get; set; }
     }
 }

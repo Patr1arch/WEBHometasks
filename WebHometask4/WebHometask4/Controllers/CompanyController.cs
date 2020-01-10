@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WebHometask4.Models;
 using Microsoft.EntityFrameworkCore;
+using WebHometask4.ViewModels;
 
 namespace WebHometask4.Controllers
 {
@@ -24,6 +25,18 @@ namespace WebHometask4.Controllers
             }
             List<Company> companies = _context.Companies.Where(elem => elem.Id.ToString().Contains(pattern)
             || elem.Name.Contains(pattern)).ToList();
+
+            //List<CompanyModel> companyModels = new List<CompanyModel>();
+            //foreach (var com in companies)
+            //{
+            //    var date = com.CreationDate.Subtract(DateTime.Now);
+            //    string lifetime = "";
+            //    if (date.TotalDays > 0) lifetime += date.TotalDays.ToString() + "дня ";
+            //    if (date.TotalHours > 0) lifetime += date.TotalHours.ToString() + "часа ";
+            //    if (date.TotalMinutes > 0) lifetime += date.TotalMinutes.ToString() + "минут(ы)";
+            //    companyModels.Add(new CompanyModel { Id = com.Id, Name = com.Name, Lifetime = lifetime });
+            //}
+
             return View(companies);
     }
 
@@ -31,10 +44,18 @@ namespace WebHometask4.Controllers
         public IActionResult Details(int? id)
         {
             if (id == null) return NotFound();
-            var obj = _context.Companies.ToList().Find(c => c.Id == id);
-            if (obj != null)
+            Company com = _context.Companies.ToList().Find(c => c.Id == id);
+
+            if (com != null)
             {
-                return View(obj);
+                var date = DateTime.Now.Subtract(com.CreationDate);
+                string lifetime = "";
+                if (Math.Floor(date.TotalDays) > 0) lifetime += Math.Floor(date.TotalDays).ToString() + "дня ";
+                if (Math.Floor(date.TotalHours) > 0) lifetime += Math.Floor(date.TotalHours).ToString() + "часа ";
+                if (Math.Floor(date.TotalMinutes) > 0) lifetime += Math.Floor(date.TotalMinutes).ToString() + "минут(ы)";
+
+                CompanyModel model = new CompanyModel { Id = com.Id, Name = com.Name, Lifetime = lifetime };
+                return View(model);
             }
             else return NotFound();
         }
@@ -52,26 +73,31 @@ namespace WebHometask4.Controllers
         }
 
         [AcceptVerbs("POST", "PUT")]
-        public IActionResult Edit(Company company, int oldId, string oldName)
+        public IActionResult Edit(Company company, DateTime CreationDate)
         {
             if (company == null || company.Name == null) return BadRequest();
 
-            _context.Companies.Remove(_context.Companies.ToList().Find(c=> c.Id == oldId));
+            company.CreationDate = CreationDate;
+            _context.Companies.Update(company); // Не работает
             _context.SaveChanges();
-            if (_context.Companies.ToList().Find(c => c.Name == company.Name) == null &&
-               _context.Companies.ToList().Find(c => c.Id == company.Id) == null)
-            {
-                //_context.Companies.Update(company); // Не работает                
-                _context.Companies.Add(company);
-                _context.SaveChanges();
-                return Redirect("~/Company/CompanyNames");
-            }
-            else
-            {
-                _context.Add(new Company { Id = oldId, Name = oldName});
-                _context.SaveChanges();
-                return BadRequest();
-            }
+            return Redirect("~/Company/CompanyNames");
+
+            //_context.Companies.Remove(_context.Companies.ToList().Find(c=> c.Id == oldId));
+            //_context.SaveChanges();
+            //if (_context.Companies.ToList().Find(c => c.Name == company.Name) == null &&
+            //   _context.Companies.ToList().Find(c => c.Id == company.Id) == null)
+            //{
+                                
+            //    //_context.Companies.Add(company);
+            //    _context.SaveChanges();
+            //    return Redirect("~/Company/CompanyNames");
+            //}
+            //else
+            //{
+            //    _context.Add(new Company { Id = oldId, Name = oldName, CreationDate = DateTime.Now });
+            //    _context.SaveChanges();
+            //    return BadRequest();
+            //}
         }
 
         [AcceptVerbs("POST", "DELETE", "GET")]
@@ -100,6 +126,7 @@ namespace WebHometask4.Controllers
 
             if (_context.Companies.ToList().Find(c => c.Id == company.Id) != null ||
                 _context.Companies.ToList().Find(c => c.Name == company.Name) != null) return BadRequest();
+            company.CreationDate = DateTime.Now;
             _context.Add(company);
             _context.SaveChanges();
             return Redirect("~/Company/CompanyNames");

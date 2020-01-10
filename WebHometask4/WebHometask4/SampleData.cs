@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System;
 using WebHometask4.Models;
 
 namespace WebHometask4
@@ -29,12 +30,14 @@ namespace WebHometask4
                     new Company
                     {
                         Id = 1,
-                        Name = "Warner Brothers"
+                        Name = "Warner Brothers",
+                        CreationDate = DateTime.Now
                     },
                     new Company
                     {
                         Id = 2,
-                        Name = "Disney"
+                        Name = "Disney",
+                        CreationDate = DateTime.Now
                     }
                     );
                 context.SaveChanges();
