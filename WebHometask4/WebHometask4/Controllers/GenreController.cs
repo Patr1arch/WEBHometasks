@@ -20,6 +20,7 @@ namespace WebHometask4.Controllers
         [HttpGet]
         public IActionResult GenreNames(string? pattern)
         {
+            ViewBag.Companies = new List<Company>(_context.Companies.ToList());
             if (pattern == null)
             {
                 return View(_context.Genres.ToList());
@@ -32,6 +33,7 @@ namespace WebHometask4.Controllers
         [HttpGet]
         public IActionResult Details(int? id)
         {
+            ViewBag.Companies = new List<Company>(_context.Companies.ToList());
             if (id == null) return NotFound();
             Genre gnr = _context.Genres.ToList().Find(g => g.Id == id);
             if (gnr != null)
@@ -51,6 +53,7 @@ namespace WebHometask4.Controllers
         [HttpGet]
         public IActionResult Edit(int? id)
         {
+            ViewBag.Companies = new List<Company>(_context.Companies.ToList());
             if (id == null) return NotFound();
             var obj = _context.Genres.ToList().Find(g => g.Id == id);
             if (obj != null)
@@ -63,6 +66,7 @@ namespace WebHometask4.Controllers
         [AcceptVerbs("POST", "PUT")]
         public IActionResult Edit(Genre genre, DateTime CreationDate)
         {
+            ViewBag.Companies = new List<Company>(_context.Companies.ToList());
             if (genre == null || genre.Name == null) return BadRequest();
 
             genre.CreationDate = CreationDate;
@@ -90,7 +94,8 @@ namespace WebHometask4.Controllers
 
         [AcceptVerbs("POST", "DELETE", "GET")]
         public IActionResult Delete(int? id)
-        {         
+        {
+            ViewBag.Companies = new List<Company>(_context.Companies.ToList());
             if (id == null) return BadRequest();
             var genre = _context.Genres.ToList().Find(g => g.Id == id);
             if (genre == null) return BadRequest();
@@ -103,12 +108,14 @@ namespace WebHometask4.Controllers
         [HttpGet] 
         public IActionResult Make()
         {
+            ViewBag.Companies = new List<Company>(_context.Companies.ToList());
             return View();
         }
 
         [HttpPost]
         public IActionResult Make(Genre genre)
         {
+            ViewBag.Companies = new List<Company>(_context.Companies.ToList());
             if (genre == null) return BadRequest();
             if (genre.Name == null) return BadRequest();
 

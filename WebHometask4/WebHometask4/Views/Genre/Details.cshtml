@@ -3,6 +3,17 @@
     ViewData["Title"] = "Жанр в деталях";
 }
 
+<ul>
+    <li>
+        <select>
+            @foreach (var com in ViewBag.Companies)
+            {
+                <option>@com.Name</option>
+            }
+        </select>
+        </li>
+ </ul>
+
 <h2> Подробное описание жанра</h2>
 <table class="table-condensed">
     <tr>

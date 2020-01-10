@@ -3,6 +3,17 @@
     ViewData["Title"] = "Редактирование жанра";
 }
 
+<ul>
+    <li>
+        <select>
+            @foreach (var com in ViewBag.Companies)
+            {
+                <option>@com.Name</option>
+            }
+        </select>
+        </li>
+ </ul>
+
 <h2> Редактирование жанра </h2>
 <form action='@Url.Action("Edit", "Genre", new { id = @Model.Id} )' method="post">
     <div class="form-group">

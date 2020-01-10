@@ -3,6 +3,16 @@
     ViewData["Title"] = "Жанры";
 }
 
+<ul>
+    <li>
+        <select>
+            @foreach (var com in ViewBag.Companies)
+            {
+                <option>@com.Name</option>
+            }
+        </select>
+        </li>
+ </ul>
 <form onclick="'@Url.Action("GenreNames", "Genre")';" method="get">
     <div class="form-group">
         <label for="Pattern" class="col-md-2 control-label">Pattern:</label>
