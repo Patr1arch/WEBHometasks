@@ -1,0 +1,8 @@
+﻿@model List<WebApplication1.Films>
+
+    <ul>
+        @foreach (var film in Model)
+        {
+            <li>@film.Name  ---  @film.Company?.Name</li>
+        }
+    </ul>

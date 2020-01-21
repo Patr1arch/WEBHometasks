@@ -1,0 +1,8 @@
+﻿@model List<WebApplication1.Seat>
+
+    <ul>
+        @foreach (var el in Model)
+        {
+            <li>Hall: @el.Hall.Name --- Seat Column: @el.Column, Seat Row: @el.Row</li>
+        }
+    </ul>
