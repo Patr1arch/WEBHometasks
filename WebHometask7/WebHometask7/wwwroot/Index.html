@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Список жанров</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body>
+    <h2>Список жанров</h2>
+    <form name="genreForm">
+        <input name="id" type="hidden" value="0" />
+        <input name="creationDate" type="hidden" value="0001-01-01 00:00:00" />
+        <div class="form-group col-md-5">
+            <label for="name">Название жанра:</label>
+            <input class="form-control" name="name" />
+        </div>
+        <div class="panel-body">
+            <button type="submit" id="submit" class="btn btn-primary">Сохранить</button>
+            <a id="reset" onclick="reset()" class="btn btn-primary">Сбросить</a>
+        </div>
+    </form>
+    <table class="table table-condensed table-striped  col-md-6">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Имя</th>
+                <th>Дата последнего изменения</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <script>
+        async function GetGenres() {
+            const response = await fetch("/api/genres", {
+                method: "GET",
+                headers: { "Accept": "application/json" }
+            });
+
+            if (response.ok === true) {
+                const genres = await response.json();
+                let rows = document.querySelector("tbody");
+                genres.forEach(genre => {
+                    rows.append(makerow(genre));
+                });
+            }
+        }
+
+        async function GetGenre(id) {
+            const response = await fetch("/api/genres/" + id, {
+                method: "GET",
+                headers: { "Accept": "application/json" }
+            });
+
+            if (response.ok === true) {
+                const genre = await response.json();
+                const form = document.forms["genreForm"];
+                form.elements["id"].value = genre.id;
+                form.elements["creationDate"].value = genre.creationDate;
+                form.elements["name"].value = genre.name;
+            }
+        }
+
+        async function CreateGenre(genreName, crD) {
+            const t = JSON.stringify({
+                //reationDate: crD,
+                name: genreName
+            });
+            const response = await fetch("/api/genres", {
+                method: "POST",
+                headers: { "Accept": "application/json", "Content-Type": "application/json" },
+                body: t
+            });
+
+            if (response.ok === true) {
+                const genre = await response.json();
+                reset();
+                document.querySelector("tbody").append(makerow(genre));
+            }
+        }
+
+        async function EditGenre(id, name, cd) {
+            var t = JSON.stringify({
+                id: parseInt(id, 10),
+                name: name,
+                //creationDate: Date.parse(cd)
+            });
+            const response = await fetch("/api/genres", {
+                method: "PUT",
+                headers: { "Accept": "application/json", "Content-Type": "application/json" },
+                body: t
+            });
+            if (response.ok === true) {
+                const genre = await response.json();
+                reset();
+                document.querySelector("tr[data-rowid='" + genre.id + "']").replaceWith(makerow(genre));
+            }
+        }
+
+        async function DeleteGenre(id) {
+            const response = await fetch("/api/genres/" + id, {
+                method: "DELETE",
+                headers: { "Accept": "application/json" }
+            });
+
+            if (response.ok === true) {
+                reset();
+                const genre = await response.json();
+                document.querySelector("tr[data-rowid='" + genre.id + "']").remove();
+            }
+        }
+
+        function makerow(genre) {
+
+            const tr = document.createElement("tr");
+            tr.setAttribute("data-rowid", genre.id);
+
+            const idTd = document.createElement("td");
+            idTd.append(genre.id);
+            tr.append(idTd);
+
+            const nameTd = document.createElement("td");
+            nameTd.append(genre.name);
+            tr.append(nameTd);
+
+            const creationTd = document.createElement("td");
+            creationTd.append(genre.creationDate);
+            tr.append(creationTd);
+
+            const linksTd = document.createElement("td");
+
+            const editLink = document.createElement("a");
+            editLink.setAttribute("data-id", genre.id);
+            editLink.setAttribute("style", "cursor:pointer;padding:15px;");
+            editLink.append("Изменить");
+            editLink.addEventListener("click", e => {
+                e.preventDefault();
+                GetGenre(genre.id)
+            });
+            linksTd.append(editLink);
+
+            linksTd.append("|");
+
+            const removeLink = document.createElement("a");
+            removeLink.setAttribute("data-id", genre.id);
+            removeLink.setAttribute("style", "cursor:pointer;padding:15px");
+            removeLink.append("Удалить");
+            removeLink.addEventListener("click", e => {
+                e.preventDefault();
+                DeleteGenre(genre.id)
+            });
+            linksTd.append(removeLink);
+
+            tr.appendChild(linksTd);
+
+            return tr;
+        }
+
+        function reset() {
+            const form = document.forms["genreForm"];
+            form.reset();
+            form.elements["id"].value = 0;
+            form.elements["creationDate"].value = "0001-01-01 00:00:00";
+        }
+
+
+        document.forms["genreForm"].addEventListener("submit", e => {
+            e.preventDefault();
+
+            var currentdate = new Date(); 
+            var datetime = currentdate.getFullYear() + "-"
+            + (currentdate.getMonth()+1)  + "-" 
+            + currentdate.getDate() + ""
+            + " "  
+            + currentdate.getHours() + ":"  
+            + (currentdate.getMinutes() < 10 ? "0" : "") + currentdate.getMinutes() + ":" 
+                + (currentdate.getSeconds() < 10 ? "0" : "") + currentdate.getSeconds();
+
+            const form = document.forms["genreForm"];
+            const id = form.elements["id"].value;
+            const name = form.elements["name"].value;
+            const cd = form.elements["creationDate"].value;
+            if (id == 0) CreateGenre(name, datetime);
+            else EditGenre(id, name, cd);
+        });
+
+        GetGenres();
+    </script>
+</body>
+</html>
